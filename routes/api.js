@@ -124,23 +124,21 @@ router.get( '/posts', (req, res) => {
 
 //
 
-//
-
-    //Créer une route API pour supprimer un article
-    router.post('/update-posts/:id', (req,res)=>{
-        console.log(req.params.id);
+    //Créer une route API pour ajouter un article
+    router.post('/update-posts', (req,res)=>{
+        console.log(req.body);
         mongoose.connect(mongoServeur, (err, db)=>{
             //Tester ma connexion
-            if(err){ res.render('add-posts', {msg:err}) }
+            if(err){ res.render('update-posts', {msg:err}) }
             else{
-                //Connexion ouverte : supprimer les données dans la BDD
+                //Connexion ouverte : ajouter les données dans la BDD
                 db.collection('posts').update({ 
-                    _id: new ObjectId(req.params.id)
-                   }, (err, newObject)=>{
-                    //Verifier LA SUPPRESSION
+                    title: req.body.title, 
+                   type:req.body.type}, (err, newObject)=>{
+                    //Verifier l'ajout
                     if(err){res.redirect(500,'/') }
                     else{
-                        res.redirect(301,'/')
+                        res.redirect(301, '/')
                     }
                 })
             };

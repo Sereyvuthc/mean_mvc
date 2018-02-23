@@ -12,18 +12,19 @@
     <main>
         <% for(let item of data){%>
             <article>
-                <h2><%= item.title %></h2>
+                    <textarea name="title"><%= item.title %></textarea>
                 <p><%= item.type %></p>
+                <select name="type">
+                        <option value="IMG">IMG</option>
+                        <option value="VID">VID</option>
+                        <option value="TXT">TXT</option>
+                </select>   
             </article>
-            <form action="/api/suppr-posts/<%=item._id %>" method="POST">
-                <button type="submit">suppr</button>  
+            <form action="/api/update-posts/<%=item._id %>" method="POST">
+                <button type="submit">Modifier</button>  
             </form>  
-            <form action="/detail-posts/<%=item._id %>" method="POST">
-                <button type="submit">MODIFIER</button>  
-            </form>  
+ 
              <% } %>
-            <a href="/add-posts">AJOUTER</a>
-            <br>
 
 
     </main>
