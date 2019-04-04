@@ -125,7 +125,7 @@ router.get( '/posts', (req, res) => {
 //
 
     //Créer une route API pour ajouter un article
-    router.post('/update-posts', (req,res)=>{
+    router.post('/update-posts/:id', (req,res)=>{
         console.log(req.body);
         mongoose.connect(mongoServeur, (err, db)=>{
             //Tester ma connexion
@@ -133,12 +133,13 @@ router.get( '/posts', (req, res) => {
             else{
                 //Connexion ouverte : ajouter les données dans la BDD
                 db.collection('posts').update({ 
+                    _id:new ObjectId(req.params.id)},{
                     title: req.body.title, 
-                   type:req.body.type}, (err, newObject)=>{
+                    type:req.body.type}, (err, newObject)=>{
                     //Verifier l'ajout
                     if(err){res.redirect(500,'/') }
                     else{
-                        res.redirect(301, '/')
+                        res.redirect(301,'/')
                     }
                 })
             };

@@ -116,7 +116,6 @@ router.get('/detail-posts',(req, res)=>{
     res.render('detail-posts')
 });
 
-
 //
 /*
 
